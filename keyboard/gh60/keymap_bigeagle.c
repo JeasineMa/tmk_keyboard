@@ -6,7 +6,7 @@
 const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* 0: Default layer
      * ,-----------------------------------------------------------.
-     * |Esc|1/Fn2| 2| 3|  4|  5|  6|  7|  8|  9|  0|  -|  =| Bs | `|
+     * |Esc| 1| 2 |3/FN2| 4|  5|  6|  7|  8|  9|  0|  -|  =| Bs | `|
      * |-----------------------------------------------------------|
      * |Tab  |  Q|  W|  E|  R|  T|  Y|  U|  I|  O|  P|  [|  ]|   \ |
      * |-----------------------------------------------------------|
@@ -18,7 +18,7 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * `-----------------------------------------------------------'
      */
     KEYMAP_HHKB(
-        FN3, FN2,   2,   3,   4,   5,   6,   7,   8,   9,   0,   MINS,EQL, BSPC, GRV, \
+        FN3, 1,   2, FN2,   4,   5,   6,   7,   8,   9,   0,   MINS,EQL, BSPC, GRV, \
         TAB, Q,   W,   E,   R,   T,   Y,   U,   I,   O,   P,   LBRC,RBRC,BSLS,      \
         LCTL,A,   S,   D,   F,   G,   H,   J,   K,   L,   SCLN,QUOT,     ENT,       \
         LSFT,Z,   X,   C,   V,   B,   N,   M,   COMM,DOT, SLSH,     RSFT,FN1,       \
@@ -28,11 +28,11 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ,-----------------------------------------------------------.
      * |` | F1| F2| F3| F4| F5| F6| F7| F8| F9| F10|F11|F12|DEL|INS|
      * |-----------------------------------------------------------|
-     * |     |   |   |   |   |   |   |   |   |   |Psc |   |   |    |
+     * |     |   |   |   |   |   |   | 7 | 8 | 9 |Psc |   |   |    |
      * |-----------------------------------------------------------|
-     * |      |Mu |V- |V+ |   |   |   |   |   |   |   |   |        |
+     * |      |Mu |V- |V+ |   |   |   | 4 | 5 | 6 |   |   |        |
      * |-----------------------------------------------------------|
-     * | Shift  |Blt|Bl↓|Bl↑|   |   |   |   |   |   |   | PgUp |   |
+     * | Shift  |Blt|Bl↓|Bl↑|   |   | 0 | 1 | 2 | 3 | 0 | PgUp |   |
      * |-----------------------------------------------------------|
      * |    |    | Alt|                        |    |Home|PgDn|End |
      * `-----------------------------------------------------------'
@@ -41,9 +41,9 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     KEYMAP_HHKB(
         GRV, F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11, F12, DEL, INS,  \
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,PSCR,TRNS,TRNS,TRNS,      \
-        TRNS,MUTE, VOLD,VOLU, TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,     PENT,      \
-        LSFT,FN4, FN5, FN6, TRNS, TRNS, TRNS,TRNS,TRNS, TRNS,TRNS,     PGUP,TRNS,      \
+        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,   7,  8,  9, PSCR,TRNS,TRNS,TRNS,      \
+        TRNS,MUTE, VOLD,VOLU, TRNS,TRNS,TRNS,  4,  5,  6, TRNS,TRNS,     PENT,      \
+        LSFT,FN4, FN5, FN6, TRNS, TRNS,    0,   1,  2,  3,   0,     PGUP,TRNS,      \
         TRNS,TRNS,LALT,          TRNS,                    TRNS,HOME,PGDN,END),
     
 	/* 2: FN1/FN2 layer
@@ -104,7 +104,7 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)
 const uint16_t PROGMEM fn_actions[] = {
     [0] = ACTION_LAYER_MOMENTARY(1),
 	[1] = ACTION_LAYER_MOMENTARY(2),
-	[2] = ACTION_LAYER_TAP_KEY(2, KC_1),
+	[2] = ACTION_LAYER_TAP_KEY(2, KC_3),
     [3] = ACTION_FUNCTION(TRICKY_ESC),  // Shift + ESC -> ~ 
     [4] = ACTION_BACKLIGHT_TOGGLE(),
     [5] = ACTION_BACKLIGHT_DECREASE(),
