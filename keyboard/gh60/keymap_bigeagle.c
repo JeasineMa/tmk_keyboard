@@ -6,23 +6,23 @@
 const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* 0: Default layer
      * ,-----------------------------------------------------------.
-     * |Esc| 1| 2 |3/FN2| 4|  5|  6|  7|  8|  9|  0|  -|  =| Bs | `|
+     * |Esc| 1| 2 |3/FN2| 4|  5|  6|  7|  8|  9|  0|  -|  =| Bs|DEL|
      * |-----------------------------------------------------------|
      * |Tab  |  Q|  W|  E|  R|  T|  Y|  U|  I|  O|  P|  [|  ]|   \ |
      * |-----------------------------------------------------------|
      * |Ctrl  |  A|  S|  D|  F|  G|  H|  J|  K|  L| ; |  '|Return  |
      * |-----------------------------------------------------------|
-     * |Shift   |  Z|  X|  C|  V|  B|  N|  M|  ,|  .|  /|Shift |Fn1|
+     * |Shift   |  Z|  X|  C|  V|  B|  N|  M|  ,|  .|  /|Shift |  `|
      * |-----------------------------------------------------------|
-     * |CAPS |Gui |Alt |      Space            | Fn0 |Alt |Ctrl|DEL|
+     * |CAPS |Gui |Alt |      Space            | Fn0| Fn1| Alt|Ctrl|
      * `-----------------------------------------------------------'
      */
     KEYMAP_HHKB(
-        FN3, 1,   2, FN2,   4,   5,   6,   7,   8,   9,   0,   MINS,EQL, BSPC, GRV, \
+        FN3, 1,   2, FN2,   4,   5,   6,   7,   8,   9,   0,   MINS,EQL, BSPC, DEL, \
         TAB, Q,   W,   E,   R,   T,   Y,   U,   I,   O,   P,   LBRC,RBRC,BSLS,      \
         LCTL,A,   S,   D,   F,   G,   H,   J,   K,   L,   SCLN,QUOT,     ENT,       \
-        LSFT,Z,   X,   C,   V,   B,   N,   M,   COMM,DOT, SLSH,     RSFT,FN1,       \
-        CAPS,  LGUI,LALT,          SPC,                     FN0, RALT, RCTL, DEL),
+        LSFT,Z,   X,   C,   V,   B,   N,   M,   COMM, DOT, SLSH,    RSFT,GRV,       \
+        CAPS,  LGUI,LALT,          SPC,                     FN0, FN1, RALT, RCTL),
 
     /* 1: FN0 Layer
      * ,-----------------------------------------------------------.
@@ -40,11 +40,11 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     KEYMAP_HHKB(
-        GRV, F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11, F12, DEL, INS,  \
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,   7,  8,  9, PSCR,TRNS,TRNS,TRNS,      \
-        TRNS,MUTE, VOLD,VOLU, TRNS,TRNS,TRNS,  4,  5,  6, TRNS,TRNS,     PENT,      \
-        LSFT,FN4, FN5, FN6, TRNS, TRNS,    0,   1,  2,  3,   0,     PGUP,TRNS,      \
-        TRNS,TRNS,LALT,          TRNS,                    TRNS,HOME,PGDN,END),
+        GRV,   F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9, F10, F11, F12, DEL, INS, \
+        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,   7,   8,   9 PSCR,TRNS,TRNS,TRNS,      \
+        TRNS,MUTE, OLD,VOLU,TRNS,TRNS,TRNS,   4,   5,   6,TRNS,TRNS,     PENT,      \
+        LSFT, FN4, FN5, FN6, TRNS, TRNS,  0,  1,   2,   3,   0,     PGUP,TRNS,      \
+        TRNS,TRNS,LALT,          TRNS,                    TRNS,HOME,PGDN, END),
     
 	/* 2: FN1/FN2 layer
      * ,-----------------------------------------------------------.
@@ -54,17 +54,17 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |-----------------------------------------------------------|
      * |      |   |  |PgD |PgD |   |Left|Down|Up|Right|  |  |      |
      * |-----------------------------------------------------------|
-     * | Shift  |   |   |   |PgU |   |   |   |   |   |   |     |   |
+     * | Shift  |   |   |   |PgU |   |   |   |   |   |   |  Up |   |
      * |-----------------------------------------------------------|
-     * |    |    | Alt|                        |    |    |    |    |
+     * |    |    | Alt|                        |   |Left|Down|Right|
      * `-----------------------------------------------------------'
      */
     KEYMAP_HHKB(
-        GRV,TRNS,TRNS,TRNS,END,TRNS,HOME,TRNS,TRNS,TRNS,HOME,TRNS,TRNS,DEL,GRV, \
+        GRV, TRNS,TRNS,TRNS, END,TRNS,HOME,TRNS,TRNS,TRNS,HOME,TRNS,TRNS, DEL, GRV, \
         TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,PGUP,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,      \
-        TRNS,TRNS, TRNS,PGDN,PGDN,TRNS,LEFT,DOWN,UP,RGHT,TRNS,TRNS,    TRNS,      \
-        LSFT,TRNS,TRNS, TRNS, TRNS, PGUP, TRNS,TRNS,TRNS, TRNS,TRNS,     TRNS,TRNS,      \
-        TRNS,TRNS,LALT,          TRNS,                    TRNS,TRNS,TRNS,TRNS),
+        TRNS,TRNS,TRNS,PGDN,PGDN,TRNS,LEFT,DOWN,  UP,RGHT,TRNS,TRNS,     TRNS,       \
+        LSFT,   TRNS,TRNS,TRNS,TRNS,PGUP,TRNS,TRNS,TRNS,TRNS,TRNS,   UP, TRNS,       \
+        TRNS,TRNS,LALT,            TRNS,                  TRNS,LEFT,DOWN,RGHT),
 };
 
 
