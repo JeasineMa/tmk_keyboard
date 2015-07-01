@@ -53,3 +53,14 @@ const uint16_t PROGMEM fn_actions[] = {
     [0] = ACTION_LAYER_TAP_KEY(1, KC_SPACE),
     [1] = ACTION_MODS_KEY(MOD_LSFT, KC_GRV),    // tilde
 };
+
+
+#ifdef KEYMAP_IN_EEPROM_ENABLE
+uint16_t keys_count(void) {
+    return sizeof(keymaps) / sizeof(keymaps[0]) * MATRIX_ROWS * MATRIX_COLS;
+}
+
+uint16_t fn_actions_count(void) {
+    return sizeof(fn_actions) / sizeof(fn_actions[0]);
+}
+#endif
