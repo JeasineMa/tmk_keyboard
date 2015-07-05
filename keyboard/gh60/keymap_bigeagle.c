@@ -1,4 +1,6 @@
 #include "keymap_common.h"
+#include "led.h"
+#include "action_layer.h"
 
 /*
  * HHKB Layout
@@ -18,11 +20,11 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * `-----------------------------------------------------------'
      */
     KEYMAP_HHKB(
-        FN3, 1,   2, FN2,   4,   5,   6,   7,   8,   9,   0,   MINS,EQL, BSPC, DEL, \
+        FN3, 1,   2, FN2,   4,   5,   6,   7,   8,   9,   0,   MINS,EQL, BSPC, GRV, \
         TAB, Q,   W,   E,   R,   T,   Y,   U,   I,   O,   P,   LBRC,RBRC,BSLS,      \
         LCTL,A,   S,   D,   F,   G,   H,   J,   K,   L,   SCLN,QUOT,     ENT,       \
-        LSFT,Z,   X,   C,   V,   B,   N,   M,   COMM, DOT, SLSH,    RSFT,GRV,       \
-        CAPS,  LGUI,LALT,          SPC,                     FN0, FN1, RALT, RCTL),
+        LSFT,Z,   X,   C,   V,   B,   N,   M,   COMM, DOT, SLSH,    RSFT,FN1,       \
+        CAPS,  LGUI,LALT,          SPC,                     FN0, RALT, RCTL, DEL),
 
     /* 1: FN0 Layer
      * ,-----------------------------------------------------------.
@@ -41,16 +43,16 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     KEYMAP_HHKB(
         GRV,   F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9, F10, F11, F12, DEL, INS, \
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,   7,   8,   9 PSCR,TRNS,TRNS,TRNS,      \
-        TRNS,MUTE, OLD,VOLU,TRNS,TRNS,TRNS,   4,   5,   6,TRNS,TRNS,     PENT,      \
-        LSFT, FN4, FN5, FN6, TRNS, TRNS,  0,  1,   2,   3,   0,     PGUP,TRNS,      \
+        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,   7,   8,   9,TRNS,PSCR,TRNS,TRNS,BSPC,      \
+        TRNS,MUTE,VOLD,VOLU,TRNS,TRNS,   4,   5,   6,TRNS,TRNS,TRNS,     PENT,      \
+        LSFT, FN4, FN5, FN6,TRNS,TRNS,   1,   2,   3,   0,TRNS,     PGUP,TRNS,      \
         TRNS,TRNS,LALT,          TRNS,                    TRNS,HOME,PGDN, END),
     
-	/* 2: FN1/FN2 layer
+	/* 2: FN1 vim layer
      * ,-----------------------------------------------------------.
-     * |`  |   |   |   |END|   |HOME|  |   |   |HOME|   |   |DEL| `|
+     * |FN7|   |   |   |END|   |HOME|  |   |   |HOME|   |  |BSPC| `|
      * |-----------------------------------------------------------|
-     * |     |   |   |   |   |   |   |PgU |   |   |   |   |   |    |
+     * |     |   |   |   |   |   |   |PgU |INS|   |   |FN7|   | DEL|
      * |-----------------------------------------------------------|
      * |      |   |  |PgD |PgD |   |Left|Down|Up|Right|  |  |      |
      * |-----------------------------------------------------------|
@@ -60,16 +62,59 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * `-----------------------------------------------------------'
      */
     KEYMAP_HHKB(
-        GRV, TRNS,TRNS,TRNS, END,TRNS,HOME,TRNS,TRNS,TRNS,HOME,TRNS,TRNS, DEL, GRV, \
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,PGUP,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,      \
-        TRNS,TRNS,TRNS,PGDN,PGDN,TRNS,LEFT,DOWN,  UP,RGHT,TRNS,TRNS,     TRNS,       \
-        LSFT,   TRNS,TRNS,TRNS,TRNS,PGUP,TRNS,TRNS,TRNS,TRNS,TRNS,   UP, TRNS,       \
+        FN7, TRNS,TRNS,TRNS, END,TRNS,HOME,TRNS,TRNS,TRNS,HOME,TRNS,TRNS,BSPC,GRV, \
+        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,PGUP, INS,TRNS,TRNS, FN7,TRNS,DEL,      \
+        TRNS,TRNS,TRNS,PGDN,PGDN,TRNS,LEFT,DOWN,  UP,RGHT,TRNS,TRNS,    TRNS,      \
+        LSFT,   TRNS,DEL,TRNS,TRNS,PGUP,TRNS,TRNS,TRNS,TRNS,TRNS,   UP, TRNS,      \
+        TRNS,TRNS,LALT,            TRNS,                  TRNS,LEFT,DOWN,RGHT),
+
+	/* 3: FN7 vim layer
+     * ,-----------------------------------------------------------.
+     * |`  |   |   |   |END|   |HOME|  |   |   |HOME|   |  |BSPC| `|
+     * |-----------------------------------------------------------|
+     * |     |   |   |   |   |   |   |PgU |FN8|   |   |   |   | DEL|
+     * |-----------------------------------------------------------|
+     * |      |FN8|  |PgD |PgD |   |Left|Down|Up|Right|  |  |      |
+     * |-----------------------------------------------------------|
+     * | Shift  |   |   |   |PgU |   |   |   |   |   |   |  Up |   |
+     * |-----------------------------------------------------------|
+     * |    |    | Alt|                        |   |Left|Down|Right|
+     * `-----------------------------------------------------------'
+     */
+    KEYMAP_HHKB(
+        GRV, TRNS,TRNS,TRNS, END,TRNS,HOME,TRNS,TRNS,TRNS,HOME,TRNS,TRNS,BSPC,GRV, \
+        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,PGUP, FN8,TRNS,TRNS,TRNS,TRNS,DEL,      \
+        TRNS, FN8,TRNS,PGDN,PGDN,TRNS,LEFT,DOWN,  UP,RGHT,TRNS,TRNS,    TRNS,      \
+        LSFT,   TRNS,DEL,TRNS,TRNS,PGUP,TRNS,TRNS,TRNS,TRNS,TRNS,   UP, TRNS,      \
         TRNS,TRNS,LALT,            TRNS,                  TRNS,LEFT,DOWN,RGHT),
 };
 
 
 enum function_id {
     TRICKY_ESC,
+	VIM_LAYOUT_ON,
+	VIM_LAYOUT_OFF
+};
+
+void layer_on_off(uint8_t layer, bool state) {
+	action_t action;
+	if (state) {
+		// layer on
+		action.code = ACTION_LAYER_ON(layer, ON_PRESS);
+	} else {
+		// layer off
+		action.code = ACTION_LAYER_OFF(layer, ON_PRESS);
+	}
+	// copied from /common/action.c
+	uint8_t shift = action.layer_bitop.part*4;
+	uint32_t bits = ((uint32_t)action.layer_bitop.bits)<<shift;
+	uint32_t mask = (action.layer_bitop.xbit) ? ~(((uint32_t)0xf)<<shift) : 0;
+	switch (action.layer_bitop.op) {
+		case OP_BIT_AND: layer_and(bits | mask); break;
+		case OP_BIT_OR:  layer_or(bits | mask);  break;
+		case OP_BIT_XOR: layer_xor(bits | mask); break;
+		case OP_BIT_SET: layer_and(mask); layer_or(bits); break;
+	}
 };
 
 void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)
@@ -95,6 +140,14 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)
                 send_keyboard_report();
             }
             break;
+		case VIM_LAYOUT_ON:
+			led_set((1<<USB_LED_CAPS_LOCK));
+			layer_on_off(3, 1);
+			break;
+		case VIM_LAYOUT_OFF:
+			led_set(0);
+			layer_on_off(3, 0);
+			break;
     }
 }
 
@@ -108,7 +161,9 @@ const uint16_t PROGMEM fn_actions[] = {
     [3] = ACTION_FUNCTION(TRICKY_ESC),  // Shift + ESC -> ~ 
     [4] = ACTION_BACKLIGHT_TOGGLE(),
     [5] = ACTION_BACKLIGHT_DECREASE(),
-    [6] = ACTION_BACKLIGHT_INCREASE()
+    [6] = ACTION_BACKLIGHT_INCREASE(),
+	[7] = ACTION_FUNCTION(VIM_LAYOUT_ON),
+	[8] = ACTION_FUNCTION(VIM_LAYOUT_OFF),
 };
 
 #ifdef KEYMAP_IN_EEPROM_ENABLE
