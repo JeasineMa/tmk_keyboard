@@ -48,7 +48,7 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         LSFT, FN4, FN5, FN6,TRNS,TRNS,   1,   2,   3,   0,TRNS,     PGUP,TRNS,      \
         TRNS,TRNS,LALT,          TRNS,                    TRNS,HOME,PGDN, END),
     
-	/* 2: FN1 vim layer
+    /* 2: FN1 vim layer
      * ,-----------------------------------------------------------.
      * |FN7|   |   |   |END|   |HOME|  |   |   |HOME|   |  |BSPC| `|
      * |-----------------------------------------------------------|
@@ -68,7 +68,7 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         LSFT,   TRNS,DEL,TRNS,TRNS,PGUP,TRNS,TRNS,TRNS,TRNS,TRNS,   UP, TRNS,      \
         TRNS,TRNS,LALT,            TRNS,                  TRNS,LEFT,DOWN,RGHT),
 
-	/* 3: FN7 vim layer
+    /* 3: FN7 vim layer
      * ,-----------------------------------------------------------.
      * |`  |   |   |   |END|   |HOME|  |   |   |HOME|   |  |BSPC| `|
      * |-----------------------------------------------------------|
@@ -92,34 +92,34 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 enum function_id {
     TRICKY_ESC,
-	VIM_LAYOUT_ON,
-	VIM_LAYOUT_OFF
+    VIM_LAYOUT_ON,
+    VIM_LAYOUT_OFF
 };
 
 void layer_on_off(uint8_t layer, bool state) {
-	action_t action;
-	if (state) {
-		// layer on
-		action.code = ACTION_LAYER_ON(layer, ON_PRESS);
-	} else {
-		// layer off
-		action.code = ACTION_LAYER_OFF(layer, ON_PRESS);
-	}
-	// copied from /common/action.c
-	uint8_t shift = action.layer_bitop.part*4;
-	uint32_t bits = ((uint32_t)action.layer_bitop.bits)<<shift;
-	uint32_t mask = (action.layer_bitop.xbit) ? ~(((uint32_t)0xf)<<shift) : 0;
-	switch (action.layer_bitop.op) {
-		case OP_BIT_AND: layer_and(bits | mask); break;
-		case OP_BIT_OR:  layer_or(bits | mask);  break;
-		case OP_BIT_XOR: layer_xor(bits | mask); break;
-		case OP_BIT_SET: layer_and(mask); layer_or(bits); break;
-	}
+    action_t action;
+    if (state) {
+        // layer on
+        action.code = ACTION_LAYER_ON(layer, ON_PRESS);
+    } else {
+        // layer off
+        action.code = ACTION_LAYER_OFF(layer, ON_PRESS);
+    }
+    // copied from /common/action.c
+    uint8_t shift = action.layer_bitop.part*4;
+    uint32_t bits = ((uint32_t)action.layer_bitop.bits)<<shift;
+    uint32_t mask = (action.layer_bitop.xbit) ? ~(((uint32_t)0xf)<<shift) : 0;
+    switch (action.layer_bitop.op) {
+        case OP_BIT_AND: layer_and(bits | mask); break;
+        case OP_BIT_OR:  layer_or(bits | mask);  break;
+        case OP_BIT_XOR: layer_xor(bits | mask); break;
+        case OP_BIT_SET: layer_and(mask); layer_or(bits); break;
+    }
 };
 
 void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)
 {
-	#define MODS_SHIFT_MASK (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT))
+    #define MODS_SHIFT_MASK (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT))
     if (record->event.pressed) dprint("P"); else dprint("R");
 
     static uint8_t tricky_esc_registered;
@@ -140,14 +140,14 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)
                 send_keyboard_report();
             }
             break;
-		case VIM_LAYOUT_ON:
-			led_set((1<<USB_LED_CAPS_LOCK));
-			layer_on_off(3, 1);
-			break;
-		case VIM_LAYOUT_OFF:
-			led_set(0);
-			layer_on_off(3, 0);
-			break;
+        case VIM_LAYOUT_ON:
+            led_set((1<<USB_LED_CAPS_LOCK));
+            layer_on_off(3, 1);
+            break;
+        case VIM_LAYOUT_OFF:
+            led_set(0);
+            layer_on_off(3, 0);
+            break;
     }
 }
 
@@ -156,14 +156,14 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)
  */
 const uint16_t PROGMEM fn_actions[] = {
     [0] = ACTION_LAYER_MOMENTARY(1),
-	[1] = ACTION_LAYER_MOMENTARY(2),
-	[2] = ACTION_LAYER_TAP_KEY(2, KC_3),
+    [1] = ACTION_LAYER_MOMENTARY(2),
+    [2] = ACTION_LAYER_TAP_KEY(2, KC_3),
     [3] = ACTION_FUNCTION(TRICKY_ESC),  // Shift + ESC -> ~ 
     [4] = ACTION_BACKLIGHT_TOGGLE(),
     [5] = ACTION_BACKLIGHT_DECREASE(),
     [6] = ACTION_BACKLIGHT_INCREASE(),
-	[7] = ACTION_FUNCTION(VIM_LAYOUT_ON),
-	[8] = ACTION_FUNCTION(VIM_LAYOUT_OFF),
+    [7] = ACTION_FUNCTION(VIM_LAYOUT_ON),
+    [8] = ACTION_FUNCTION(VIM_LAYOUT_OFF),
 };
 
 #ifdef KEYMAP_IN_EEPROM_ENABLE
@@ -175,3 +175,5 @@ uint16_t fn_actions_count(void) {
     return sizeof(fn_actions) / sizeof(fn_actions[0]);
 }
 #endif
+
+// vim: ts=4 sts=4 sw=4 expandtab
