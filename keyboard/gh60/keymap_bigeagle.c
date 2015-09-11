@@ -14,9 +14,9 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |-----------------------------------------------------------|
      * |Ctrl  |  A|  S|  D|  F|  G|  H|  J|  K|  L| ; |  '|Return  |
      * |-----------------------------------------------------------|
-     * |Shift   |  Z|  X|  C|  V|  B|  N|  M|  ,|  .|  /|Shift |  `|
+     * |Shift   |  Z|  X|  C|  V|  B|  N|  M|  ,|  .|  /|Shift |Fn1|
      * |-----------------------------------------------------------|
-     * |CAPS |Gui |Alt |      Space            | Fn0| Fn1| Alt|Ctrl|
+     * |CAPS |Sup |Alt |      Space            | Fn0| Alt| Ctl| DEL|
      * `-----------------------------------------------------------'
      */
     KEYMAP_HHKB(
